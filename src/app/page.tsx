@@ -16,7 +16,7 @@ export default function Home() {
   useEffect(() => {
     const fetchData = () => {
       if (!process.env.NEXT_PUBLIC_API_IP) {
-        throw new Error("IPADDRESS is not defined");
+        throw new Error("Api is not defined");
       }
 
       fetch(process.env.NEXT_PUBLIC_API_IP)
@@ -50,7 +50,6 @@ export default function Home() {
           <p>Temperature: {data.temperature}</p>
           <p>Humidity: {data.humidity}</p>
           <p>Pressure: {data.pressure}</p>
-          <p>Altitude: {data.altitude}</p>
         </div>
       ) : (
         <p>
