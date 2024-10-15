@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { LuLoader2 } from "react-icons/lu";
 import MetricCard from "./components/MetricCard";
 import OrderByHourChart from "./components/charts/OrderByHourChart";
+import { NavBar } from "./components/NavBar";
 
 type DataTypes = {
   temperature: number;
@@ -16,7 +17,6 @@ export type HistoryDataPoint = DataTypes;
 
 export default function Home() {
   const [data, setData] = useState<DataTypes | null>(null);
-  const [history, setHistory] = useState<HistoryDataPoint[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export default function Home() {
         })
         .then((data) => {
           setData(data);
-          setHistory((prevHistory) => [...prevHistory, data]);
           setError(null);
         })
         .catch((error) => {
@@ -42,7 +41,8 @@ export default function Home() {
           setData(null);
         });
     };
-    const dataInterval = setInterval(fetchData, 1 * 1000);
+
+    const dataInterval = setInterval(fetchData, 10 * 1000);
     fetchData();
 
     return () => {
@@ -51,17 +51,26 @@ export default function Home() {
   }, []);
 
   if (error) {
-    return <p>Error {error.message}</p>;
+    return (
+      <>
+        <NavBar />
+        <div className="container mx-auto px-4 py-8">
+          <p className="text-red-500 text-center">Error: {error.message}</p>
+        </div>
+      </>
+    );
   }
 
   if (!data) {
     return (
-      <div className="flex h-screen items-center justify-center">
-        <LuLoader2 className="h-8 w-8 animate-spin" />
-      </div>
+      <>
+        <NavBar />
+        <div className="flex h-screen items-center justify-center">
+          <LuLoader2 className="h-12 w-12 animate-spin text-blue-600" />
+        </div>
+      </>
     );
   }
-
   const metrics = [
     { title: "Temperature", value: data.temperature, unit: "°C" },
     { title: "Humidity", value: data.humidity, unit: "%" },
@@ -69,20 +78,21 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex flex-col justify-center items-center mx-auto">
-      <div className="flex justify-between gap-4">
-        {metrics.map((metric, index) => (
-          <MetricCard
-            key={index}
-            title={metric.title}
-            value={metric.value}
-            unit={metric.unit}
-          />
-        ))}
-      </div>
-      <div>
-        <OrderByHourChart history={history} />
-      </div>
-    </main>
+    <>
+      <NavBar />
+      <main className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold text-center mb-8">Current Weather</h1>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {metrics.map((metric, index) => (
+            <MetricCard
+              key={index}
+              title={metric.title}
+              value={metric.value}
+              unit={metric.unit}
+            />
+          ))}
+        </div>
+      </main>
+    </>
   );
 }
