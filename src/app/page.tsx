@@ -42,7 +42,7 @@ export default function Home() {
         });
     };
 
-    const dataInterval = setInterval(fetchData, 10 * 1000);
+    const dataInterval = setInterval(fetchData, 5 * 1000);
     fetchData();
 
     return () => {

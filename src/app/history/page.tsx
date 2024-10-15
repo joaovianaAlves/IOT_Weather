@@ -59,7 +59,7 @@ export default function History() {
     }
 
     fetchHistory();
-    const historyInterval = setInterval(fetchHistory, 2 * 1000);
+    const historyInterval = setInterval(fetchHistory, 4 * 1000);
 
     return () => {
       clearInterval(historyInterval);
