@@ -33,8 +33,8 @@ export default function Home() {
           return response.json();
         })
         .then((data) => {
-          console.log(data);
           setData(data);
+          setHistory((prevHistory) => [...prevHistory, data]);
           setError(null);
         })
         .catch((error) => {
@@ -42,31 +42,11 @@ export default function Home() {
           setData(null);
         });
     };
-    const fetchHistory = () => {
-      fetch(`${process.env.NEXT_PUBLIC_API_IP}/history`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Something went Wrong ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((history: DataTypes[]) => {
-          setHistory(history);
-          setError(null);
-        })
-        .catch((error) => {
-          setError(error);
-          setData(null);
-        });
-    };
-    const dataInterval = setInterval(fetchData, 60 * 1000);
-    const historyInterval = setInterval(fetchHistory, 10 * 60 * 1000);
+    const dataInterval = setInterval(fetchData, 1 * 1000);
     fetchData();
-    fetchHistory();
 
     return () => {
       clearInterval(dataInterval);
-      clearInterval(historyInterval);
     };
   }, []);
 
@@ -74,7 +54,7 @@ export default function Home() {
     return <p>Error {error.message}</p>;
   }
 
-  if (!data || history.length === 0) {
+  if (!data) {
     return (
       <div className="flex h-screen items-center justify-center">
         <LuLoader2 className="h-8 w-8 animate-spin" />
