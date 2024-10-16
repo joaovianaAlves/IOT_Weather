@@ -18,7 +18,9 @@ export default function History() {
 
   useEffect(() => {
     const fetchHistory = () => {
-      fetch(`${process.env.NEXT_PUBLIC_API_IP}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
+        headers: { "ngrok-skip-browser-warning": "true" },
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error("Failed to fetch data");
