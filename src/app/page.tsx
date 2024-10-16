@@ -29,7 +29,7 @@ export default function Home() {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`Response Not ok, http:${response.status}`);
+            throw new Error(`Response Not ok, https:${response.status}`);
           }
           return response.json();
         })
