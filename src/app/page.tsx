@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { LuLoader2 } from "react-icons/lu";
 import MetricCard from "./components/MetricCard";
-import OrderByHourChart from "./components/charts/OrderByHourChart";
 import { NavBar } from "./components/NavBar";
 
 type DataTypes = {
@@ -25,7 +24,9 @@ export default function Home() {
         throw new Error("Api is not defined");
       }
 
-      fetch(`${process.env.NEXT_PUBLIC_API_IP}`)
+      fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
+        headers: { "ngrok-skip-browser-warning": "true" },
+      })
         .then((response) => {
           if (!response.ok) {
             throw new Error(`Response Not ok, http:${response.status}`);
