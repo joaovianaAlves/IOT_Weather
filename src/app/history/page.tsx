@@ -19,7 +19,11 @@ export default function History() {
   useEffect(() => {
     const fetchHistory = () => {
       fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
-        headers: { "ngrok-skip-browser-warning": "true" },
+        mode: "cors", // Add this line
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+          "Content-Type": "application/json",
+        },
       })
         .then((response) => {
           if (!response.ok) {

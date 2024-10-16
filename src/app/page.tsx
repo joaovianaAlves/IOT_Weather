@@ -21,11 +21,15 @@ export default function Home() {
   useEffect(() => {
     const fetchData = () => {
       if (!process.env.NEXT_PUBLIC_API_IP) {
-        throw new Error("Api is not defined");
+        throw new Error("API is not defined");
       }
 
       fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
-        headers: { "ngrok-skip-browser-warning": "true" },
+        mode: "cors", // Add this line
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+          "Content-Type": "application/json",
+        },
       })
         .then((response) => {
           if (!response.ok) {
