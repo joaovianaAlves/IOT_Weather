@@ -25,7 +25,7 @@ export default function Home() {
       }
 
       fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
-        mode: "cors", // Add this line
+        mode: "cors",
         headers: {
           "ngrok-skip-browser-warning": "true",
           "Content-Type": "application/json",
