@@ -85,9 +85,9 @@ export default function DataChart() {
 
             const updatedHistory = [...prevHistory, data];
 
-            if (updatedHistory.length > 21) {
-              updatedHistory.shift();
-            }
+            // if (updatedHistory.length > 21) {
+            //   updatedHistory.shift();
+            // }
 
             localStorage.setItem(
               "chartHistory",
