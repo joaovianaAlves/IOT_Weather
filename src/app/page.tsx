@@ -28,7 +28,7 @@ export default function Home() {
         method: "GET",
         mode: "cors",
         headers: {
-          // "ngrok-skip-browser-warning": "true",
+          "ngrok-skip-browser-warning": "true",
           "Content-Type": "application/json",
         },
       })
