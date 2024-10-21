@@ -8,7 +8,6 @@ type MetricCardProps = {
 };
 
 export default function MetricCard({ title, value, unit }: MetricCardProps) {
-  // Determine the icon based on the title
   let icon;
   switch (title) {
     case "Temperature":
