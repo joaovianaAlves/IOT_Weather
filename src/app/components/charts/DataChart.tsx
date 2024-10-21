@@ -110,7 +110,7 @@ export default function DataChart() {
     }
 
     fetchHistory();
-    const historyInterval = setInterval(fetchHistory, 4 * 1000);
+    const historyInterval = setInterval(fetchHistory, 10 * 60 * 1000);
 
     return () => {
       clearInterval(historyInterval);
