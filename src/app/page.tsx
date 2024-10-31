@@ -8,7 +8,8 @@ type DataTypes = {
   temperature: number;
   humidity: number;
   pressure: number;
-  altitude: number;
+  uvIndex: number;
+  precipitation: number;
   time: string;
 };
 
@@ -81,6 +82,8 @@ export default function Home() {
     { title: "Temperature", value: data.temperature, unit: "°C" },
     { title: "Humidity", value: data.humidity, unit: "%" },
     { title: "Pressure", value: data.pressure, unit: "hPa" },
+    { title: "Precipitation", value: data.precipitation, unit: "mm" },
+    { title: "UV Index", value: data.uvIndex, unit: "" },
   ];
 
   return (

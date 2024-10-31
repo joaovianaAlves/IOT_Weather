@@ -1,5 +1,11 @@
 import React from "react";
-import { WiThermometer, WiHumidity, WiBarometer } from "react-icons/wi"; // Import icons
+import {
+  WiThermometer,
+  WiHumidity,
+  WiBarometer,
+  WiDaySunny,
+  WiRaindrop,
+} from "react-icons/wi"; // Import icons
 
 type MetricCardProps = {
   title: string;
@@ -18,6 +24,12 @@ export default function MetricCard({ title, value, unit }: MetricCardProps) {
       break;
     case "Pressure":
       icon = <WiBarometer className="text-2xl text-gray-600" />;
+      break;
+    case "UV Index":
+      icon = <WiDaySunny className="text-2xl text-yellow-500" />;
+      break;
+    case "Precipitation":
+      icon = <WiRaindrop className="text-2xl text-blue-500" />;
       break;
     default:
       icon = null;
