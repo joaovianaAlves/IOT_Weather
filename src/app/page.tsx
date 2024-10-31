@@ -41,7 +41,6 @@ export default function Home() {
         })
         .then((data) => {
           setData(data);
-          console.log(data);
           setError(null);
         })
         .catch((error) => {
@@ -49,7 +48,7 @@ export default function Home() {
           setData(null);
         });
     };
-
+    console.log(data);
     const dataInterval = setInterval(fetchData, 5 * 1000);
     fetchData();
 
