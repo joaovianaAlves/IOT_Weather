@@ -41,6 +41,7 @@ export default function Home() {
         })
         .then((data) => {
           setData(data);
+          console.log(data);
           setError(null);
         })
         .catch((error) => {

@@ -5,8 +5,7 @@ import {
   WiBarometer,
   WiDaySunny,
   WiRaindrop,
-} from "react-icons/wi"; // Import icons
-
+} from "react-icons/wi";
 type MetricCardProps = {
   title: string;
   value: number | undefined;
