@@ -14,7 +14,7 @@ export type HistoryDataPoint = {
   temperature?: number;
   humidity?: number;
   pressure?: number;
-  uvIndex?: number;
+  uv_index?: number;
   precipitation?: number;
   time: string;
 };
@@ -133,7 +133,7 @@ export default function DataChart() {
         dataKey="precipitation"
         title="Precipitation over time"
       />
-      <Chart data={history} dataKey="uvIndex" title="Uv over time" />
+      <Chart data={history} dataKey="uv_index" title="Uv over time" />
     </div>
   );
 }
