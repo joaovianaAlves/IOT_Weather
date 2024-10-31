@@ -8,7 +8,7 @@ type DataTypes = {
   temperature: number;
   humidity: number;
   pressure: number;
-  uvIndex: number;
+  uv_index: number;
   precipitation: number;
   time: string;
 };
@@ -48,7 +48,7 @@ export default function Home() {
           setData(null);
         });
     };
-    console.log(data);
+
     const dataInterval = setInterval(fetchData, 5 * 1000);
     fetchData();
 
@@ -83,7 +83,7 @@ export default function Home() {
     { title: "Humidity", value: data.humidity, unit: "%" },
     { title: "Pressure", value: data.pressure, unit: "hPa" },
     { title: "Precipitation", value: data.precipitation, unit: "mm" },
-    { title: "UV Index", value: data.uvIndex, unit: "" },
+    { title: "UV Index", value: data.uv_index, unit: "" },
   ];
 
   return (
