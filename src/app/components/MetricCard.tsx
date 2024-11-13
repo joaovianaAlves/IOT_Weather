@@ -5,6 +5,7 @@ import {
   WiBarometer,
   WiDaySunny,
   WiRaindrop,
+  WiFlood,
 } from "react-icons/wi";
 type MetricCardProps = {
   title: string;
@@ -29,6 +30,9 @@ export default function MetricCard({ title, value, unit }: MetricCardProps) {
       break;
     case "Precipitation":
       icon = <WiRaindrop className="text-2xl text-blue-500" />;
+      break;
+    case "Altitude":
+      icon = <WiFlood className="text-2xl text-blue-500" />;
       break;
     default:
       icon = null;

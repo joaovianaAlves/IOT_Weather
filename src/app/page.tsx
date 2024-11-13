@@ -12,6 +12,7 @@ type DataTypes = {
   uv_index: number;
   precipitation: number;
   time: string;
+  altitude: number;
 };
 
 export default function Home() {
@@ -83,6 +84,7 @@ export default function Home() {
     { title: "Pressure", value: data.pressure, unit: "hPa" },
     { title: "Precipitation", value: data.precipitation, unit: "mm" },
     { title: "UV Index", value: data.uv_index, unit: "" },
+    { title: "Altitude", value: data.altitude, unit: "m" },
   ];
 
   return (
