@@ -1,5 +1,5 @@
 "use client";
-import DataChart from "../components/charts/DataChart";
+import DbData from "../components/charts/DbData";
 import { NavBar } from "../components/NavBar";
 
 export default function History() {
@@ -11,7 +11,7 @@ export default function History() {
           Weather History
         </h1>
         <div className="bg-white rounded-xl shadow-md p-6">
-          <DataChart />
+          <DbData />
         </div>
       </main>
     </>

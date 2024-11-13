@@ -113,6 +113,14 @@ export default function Home() {
     { title: "UV Index", value: data.uv_index, unit: "" },
   ];
 
+  const dbMetrics = [
+    { title: "Temperature", value: data.temperature, unit: "°C" },
+    { title: "Humidity", value: data.humidity, unit: "%" },
+    { title: "Pressure", value: data.pressure, unit: "hPa" },
+    { title: "Precipitation", value: data.precipitation, unit: "mm" },
+    { title: "UV Index", value: data.uv_index, unit: "" },
+  ];
+
   return (
     <>
       <NavBar />
