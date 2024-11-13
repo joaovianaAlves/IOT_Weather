@@ -14,13 +14,8 @@ type DataTypes = {
   time: string;
 };
 
-type DbDataTypes = DataTypes[];
-
-export type HistoryDataPoint = DataTypes;
-
 export default function Home() {
   const [data, setData] = useState<DataTypes | null>(null);
-  const [dbData, setDbData] = useState<DbDataTypes | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
@@ -45,29 +40,6 @@ export default function Home() {
         })
         .then((data) => {
           setData(data);
-          setError(null);
-        })
-        .catch((error) => {
-          setError(error);
-          setData(null);
-        });
-
-      fetch(`${process.env.NEXT_PUBLIC_API_IP}/data`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Response Not ok, https:${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setDbData(data);
           setError(null);
         })
         .catch((error) => {
@@ -113,14 +85,6 @@ export default function Home() {
     { title: "UV Index", value: data.uv_index, unit: "" },
   ];
 
-  const dbMetrics = [
-    { title: "Temperature", value: data.temperature, unit: "°C" },
-    { title: "Humidity", value: data.humidity, unit: "%" },
-    { title: "Pressure", value: data.pressure, unit: "hPa" },
-    { title: "Precipitation", value: data.precipitation, unit: "mm" },
-    { title: "UV Index", value: data.uv_index, unit: "" },
-  ];
-
   return (
     <>
       <NavBar />
@@ -135,19 +99,6 @@ export default function Home() {
               unit={metric.unit}
             />
           ))}
-        </div>
-        <div>
-          {dbData &&
-            dbData.map((data) => (
-              <div key={data.id}>
-                <p>Time: {data.time}</p>
-                <p>Temperature: {data.temperature}°C</p>
-                <p>Humidity: {data.humidity}%</p>
-                <p>Pressure: {data.pressure} hPa</p>
-                <p>UV Index: {data.uv_index}</p>
-                <p>Precipitation: {data.precipitation} mm</p>
-              </div>
-            ))}
         </div>
       </main>
     </>
