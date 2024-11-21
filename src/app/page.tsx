@@ -19,44 +19,6 @@ export default function Home() {
   const [data, setData] = useState<DataTypes | null>(null);
   const [error, setError] = useState<Error | null>(null);
 
-  useEffect(() => {
-    const fetchData = () => {
-      if (!process.env.NEXT_PUBLIC_API_IP) {
-        throw new Error("API is not defined");
-      }
-
-      fetch(`${process.env.NEXT_PUBLIC_API_IP}`, {
-        method: "GET",
-        mode: "cors",
-        headers: {
-          "ngrok-skip-browser-warning": "true",
-          "Content-Type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`Response Not ok, https:${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setData(data);
-          setError(null);
-        })
-        .catch((error) => {
-          setError(error);
-          setData(null);
-        });
-    };
-
-    const dataInterval = setInterval(fetchData, 5 * 1000);
-    fetchData();
-
-    return () => {
-      clearInterval(dataInterval);
-    };
-  }, []);
-
   if (error) {
     return (
       <>
