@@ -47,9 +47,9 @@ export default function MetricCard({ title, value, unit }: MetricCardProps) {
             {title}
           </h2>
         </div>
-        <div className="flex items-baseline justify-center text-4xl font-bold text-blue-600">
+        <div className="flex items-baseline justify-center text-4xl font-bold text-gray-800">
           <span>{value}</span>
-          {unit && <span className="text-xl text-gray-500 ml-2">{unit}</span>}
+          {unit && <span className="text-xl text-gray-600 ml-2">{unit}</span>}
         </div>
       </div>
     </div>

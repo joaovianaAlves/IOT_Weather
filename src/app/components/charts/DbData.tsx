@@ -96,7 +96,7 @@ export default function DbData() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-4 bg-white shadow-md rounded-lg">
+    <div className="max-w-4xl mx-auto p-2 bg-white rounded-lg">
       <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
         Filtrar Dados por Data
       </h1>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { LuLoader2 } from "react-icons/lu";
 import MetricCard from "./components/MetricCard";
 import { NavBar } from "./components/NavBar";
+import { supabase } from "@/utils/db";
 
 type DataTypes = {
   id?: string;
@@ -16,8 +17,28 @@ type DataTypes = {
 };
 
 export default function Home() {
-  const [data, setData] = useState<DataTypes | null>(null);
+  const [realTimeData, setRealTimeData] = useState<DataTypes | null>(null);
   const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const { data, error } = await supabase
+        .from("real_time")
+        .select()
+        .order("id", { ascending: false })
+        .limit(1);
+
+      if (error) {
+        setError(error);
+        return;
+      } else if (data && data.length > 0) {
+        setRealTimeData(data[0]);
+      } else {
+        setError(new Error("No data available."));
+      }
+    }
+    fetchData();
+  }, []);
 
   if (error) {
     return (
@@ -30,30 +51,32 @@ export default function Home() {
     );
   }
 
-  if (!data) {
+  if (!realTimeData) {
     return (
       <>
         <NavBar />
         <div className="flex h-screen items-center justify-center">
-          <LuLoader2 className="h-12 w-12 animate-spin text-blue-600" />
+          <LuLoader2 className="h-12 w-12 animate-spin text-gray-800" />
         </div>
       </>
     );
   }
   const metrics = [
-    { title: "Temperature", value: data.temperature, unit: "°C" },
-    { title: "Humidity", value: data.humidity, unit: "%" },
-    { title: "Pressure", value: data.pressure, unit: "hPa" },
-    { title: "Precipitation", value: data.precipitation, unit: "mm" },
-    { title: "UV Index", value: data.uv_index, unit: "" },
-    { title: "Altitude", value: data.altitude, unit: "m" },
+    { title: "Temperature", value: realTimeData.temperature, unit: "°C" },
+    { title: "Humidity", value: realTimeData.humidity, unit: "%" },
+    { title: "Pressure", value: realTimeData.pressure, unit: "hPa" },
+    { title: "Precipitation", value: realTimeData.precipitation, unit: "mm" },
+    { title: "UV Index", value: realTimeData.uv_index, unit: "" },
+    { title: "Altitude", value: realTimeData.altitude, unit: "m" },
   ];
 
   return (
     <>
       <NavBar />
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-center mb-8">Current Weather</h1>
+        <h1 className="text-3xl text-gray-800 font-bold text-center mb-8">
+          Current Weather
+        </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric, index) => (
             <MetricCard

@@ -6,7 +6,7 @@ import { RiLineChartLine } from "react-icons/ri";
 
 export function NavBar() {
   return (
-    <nav className="bg-blue-600 text-white py-4">
+    <nav className="bg-gray-800 text-white py-4">
       <div className="container mx-auto px-6 flex justify-between items-center">
         <Link href="/" className="flex items-center space-x-2">
           <WiDaySunny className="text-3xl" />
