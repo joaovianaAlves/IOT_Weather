@@ -135,7 +135,7 @@ export default function DbData() {
         Dados Filtrados:
       </h2>
       {filteredData && filteredData.length > 0 ? (
-        <div className="overflow-x-auto max-h-96">
+        <div className="overflow-x-auto max-h-80">
           <table className="min-w-full table-auto border-collapse border border-gray-300">
             <thead className="bg-gray-800 text-white">
               <tr>
