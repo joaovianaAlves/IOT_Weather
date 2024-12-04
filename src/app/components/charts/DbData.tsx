@@ -29,11 +29,19 @@ export default function DbData() {
 
   useEffect(() => {
     async function fetchAndFilterData() {
+      const startDate = new Date(selectedDate1);
+      const endDate = new Date(selectedDate2);
+
+      if (startDate.getTime() === endDate.getTime()) {
+        startDate.setHours(0, 0, 0, 0);
+        endDate.setHours(23, 59, 59, 999);
+      }
+
       const { data, error } = await supabase
         .from("hourly_conditions")
         .select()
-        .gte("time", selectedDate1.toISOString())
-        .lte("time", selectedDate2.toISOString());
+        .gte("time", startDate.toISOString())
+        .lte("time", endDate.toISOString());
 
       if (error) {
         setError(error);
@@ -105,6 +113,7 @@ export default function DbData() {
             selected={selectedDate1}
             onChange={(date) => setSelectedDate1(date || new Date())}
             dateFormat="yyyy-MM-dd"
+            maxDate={new Date()}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
@@ -115,6 +124,8 @@ export default function DbData() {
             selected={selectedDate2}
             onChange={(date) => setSelectedDate2(date || new Date())}
             dateFormat="yyyy-MM-dd"
+            maxDate={new Date()}
+            minDate={selectedDate1}
             className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
