@@ -62,10 +62,10 @@ export default function Home() {
     );
   }
   const metrics = [
-    { title: "Temperature", value: realTimeData.temperature, unit: "°C" },
-    { title: "Humidity", value: realTimeData.humidity, unit: "%" },
-    { title: "Pressure", value: realTimeData.pressure, unit: "hPa" },
-    { title: "Precipitation", value: realTimeData.precipitation, unit: "mm" },
+    { title: "Temperatura", value: realTimeData.temperature, unit: "°C" },
+    { title: "Humidade", value: realTimeData.humidity, unit: "%" },
+    { title: "Pressão", value: realTimeData.pressure, unit: "hPa" },
+    { title: "Precitação", value: realTimeData.precipitation, unit: "mm" },
     { title: "UV Index", value: realTimeData.uv_index, unit: "" },
     { title: "Altitude", value: realTimeData.altitude, unit: "m" },
   ];
@@ -75,7 +75,7 @@ export default function Home() {
       <NavBar />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-3xl text-gray-800 font-bold text-center mb-8">
-          Current Weather
+          Clima Atual
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric, index) => (

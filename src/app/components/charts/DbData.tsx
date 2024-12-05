@@ -3,6 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { supabase } from "@/utils/db";
 import DatePicker from "react-datepicker";
+import MetricCard from "../MetricCard";
 
 type DbDataTypes = {
   id?: string;
@@ -26,6 +27,14 @@ export default function DbData() {
     precipitation: 0,
   });
   const [error, setError] = useState<Error | null>(null);
+
+  const metrics = [
+    { title: "Temperatura", value: averages.temperature, unit: "°C" },
+    { title: "Humidade", value: averages.humidity, unit: "%" },
+    { title: "Pressão", value: averages.pressure, unit: "hPa" },
+    { title: "Precitação", value: averages.precipitation, unit: "mm" },
+    { title: "UV Index", value: averages.uv_index, unit: "" },
+  ];
 
   useEffect(() => {
     async function fetchAndFilterData() {
@@ -107,26 +116,26 @@ export default function DbData() {
       </h1>
       <div className="flex justify-center gap-4 mb-6">
         <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">Start Date</label>
+          <label className="mb-2 font-medium text-gray-700">Data inicial</label>
           <DatePicker
             id="start-date"
             selected={selectedDate1}
             onChange={(date) => setSelectedDate1(date || new Date())}
-            dateFormat="yyyy-MM-dd"
+            dateFormat="dd-MM-yyyy"
             maxDate={new Date()}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+            className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
         <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">End Date</label>
+          <label className="mb-2 font-medium text-gray-700">Data final</label>
           <DatePicker
             id="end-date"
             selected={selectedDate2}
             onChange={(date) => setSelectedDate2(date || new Date())}
-            dateFormat="yyyy-MM-dd"
+            dateFormat="dd-MM-yyyy"
             maxDate={new Date()}
             minDate={selectedDate1}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+            className="w-full border border-gray-300 text-center rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
       </div>
@@ -139,12 +148,12 @@ export default function DbData() {
           <table className="min-w-full table-auto border-collapse border border-gray-300">
             <thead className="bg-gray-800 text-white">
               <tr>
-                <th className="border border-gray-300 px-4 py-2">Time</th>
+                <th className="border border-gray-300 px-4 py-2">Data</th>
                 <th className="border border-gray-300 px-4 py-2">
-                  Temperature
+                  Temperatura
                 </th>
-                <th className="border border-gray-300 px-4 py-2">Humidity</th>
-                <th className="border border-gray-300 px-4 py-2">Pressure</th>
+                <th className="border border-gray-300 px-4 py-2">Humidade</th>
+                <th className="border border-gray-300 px-4 py-2">Pressão</th>
               </tr>
             </thead>
             <tbody>
@@ -176,13 +185,16 @@ export default function DbData() {
         </p>
       )}
       <h2 className="text-xl font-semibold text-gray-700 mt-6">Médias:</h2>
-      <ul className="list-disc ml-6 mt-4 text-gray-800">
-        <li>Temperatura: {averages.temperature}°C</li>
-        <li>Umidade: {averages.humidity}%</li>
-        <li>Pressão: {averages.pressure} hPa</li>
-        <li>Índice UV: {averages.uv_index}</li>
-        <li>Precipitação: {averages.precipitation} mm</li>
-      </ul>
+      <div className="flex ml-6 mt-4 text-gray-800 justify-center gap-3">
+        {metrics.map((metric, index) => (
+          <MetricCard
+            key={index}
+            title={metric.title}
+            unit={metric.unit}
+            value={metric.value}
+          />
+        ))}
+      </div>
     </div>
   );
 }
