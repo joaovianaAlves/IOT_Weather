@@ -32,7 +32,7 @@ export default function DbData() {
     { title: "Temperatura", value: averages.temperature, unit: "°C" },
     { title: "Humidade", value: averages.humidity, unit: "%" },
     { title: "Pressão", value: averages.pressure, unit: "hPa" },
-    { title: "Precitação", value: averages.precipitation, unit: "mm" },
+    { title: "Precipitação", value: averages.precipitation, unit: "mm" },
     { title: "UV Index", value: averages.uv_index, unit: "" },
   ];
 

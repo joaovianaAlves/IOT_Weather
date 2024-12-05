@@ -16,19 +16,19 @@ type MetricCardProps = {
 export default function MetricCard({ title, value, unit }: MetricCardProps) {
   let icon;
   switch (title) {
-    case "Temperature":
+    case "Temperatura":
       icon = <WiThermometer className="text-2xl text-red-500" />;
       break;
-    case "Humidity":
+    case "Humidade":
       icon = <WiHumidity className="text-2xl text-blue-400" />;
       break;
-    case "Pressure":
+    case "Pressão":
       icon = <WiBarometer className="text-2xl text-gray-600" />;
       break;
     case "UV Index":
       icon = <WiDaySunny className="text-2xl text-yellow-500" />;
       break;
-    case "Precipitation":
+    case "Precipitação":
       icon = <WiRaindrop className="text-2xl text-blue-500" />;
       break;
     case "Altitude":
