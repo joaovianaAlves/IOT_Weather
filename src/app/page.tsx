@@ -25,7 +25,7 @@ export default function Home() {
       const { data, error } = await supabase
         .from("real_time")
         .select()
-        .order("id", { ascending: false })
+        .order("time", { ascending: false })
         .limit(1);
 
       if (error) {
