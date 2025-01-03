@@ -4,6 +4,7 @@ import { LuLoader2 } from "react-icons/lu";
 import MetricCard from "./components/MetricCard";
 import { NavBar } from "./components/NavBar";
 import { supabase } from "@/utils/db";
+import { format } from "date-fns";
 
 type DataTypes = {
   id?: string;
@@ -12,7 +13,7 @@ type DataTypes = {
   pressure: number;
   uv_index: number;
   precipitation: number;
-  time: string;
+  time: Date;
   altitude: number;
 };
 
@@ -65,7 +66,7 @@ export default function Home() {
     { title: "Temperatura", value: realTimeData.temperature, unit: "°C" },
     { title: "Humidade", value: realTimeData.humidity, unit: "%" },
     { title: "Pressão", value: realTimeData.pressure, unit: "hPa" },
-    { title: "Precitação", value: realTimeData.precipitation, unit: "mm" },
+    { title: "Precipitação", value: realTimeData.precipitation, unit: "mm" },
     { title: "UV Index", value: realTimeData.uv_index, unit: "" },
     { title: "Altitude", value: realTimeData.altitude, unit: "m" },
   ];
@@ -74,9 +75,12 @@ export default function Home() {
     <>
       <NavBar />
       <main className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl text-gray-800 font-bold text-center mb-8">
+        <h1 className="text-3xl text-gray-800 font-bold text-center mb-2">
           Clima Atual
         </h1>
+        <p className="text-gray-600 text-center mb-8">
+          Atualizado em: {format(realTimeData.time, "yyyy/MM/dd")}
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric, index) => (
             <MetricCard

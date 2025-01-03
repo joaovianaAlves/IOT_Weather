@@ -9,7 +9,7 @@ import {
 } from "react-icons/wi";
 type MetricCardProps = {
   title: string;
-  value: number | undefined;
+  value: Date | string | number | undefined;
   unit: string;
 };
 
@@ -48,7 +48,7 @@ export default function MetricCard({ title, value, unit }: MetricCardProps) {
           </h2>
         </div>
         <div className="flex items-baseline justify-center text-4xl font-bold text-gray-800">
-          <span>{value}</span>
+          <span>{String(value)}</span>
           {unit && <span className="text-xl text-gray-600 ml-2">{unit}</span>}
         </div>
       </div>
