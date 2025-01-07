@@ -79,7 +79,7 @@ export default function Home() {
           Clima Atual
         </h1>
         <p className="text-gray-600 text-center mb-8">
-          Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:MM")}
+          Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {metrics.map((metric, index) => (
