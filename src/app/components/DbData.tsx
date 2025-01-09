@@ -110,82 +110,99 @@ export default function DbData() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-2 bg-white rounded-lg">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-        Filtrar Dados por Data
-      </h1>
-      <div className="flex justify-center gap-4 mb-6">
-        <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">Data inicial</label>
-          <DatePicker
-            id="start-date"
-            selected={selectedDate1}
-            onChange={(date) => setSelectedDate1(date || new Date())}
-            dateFormat="dd-MM-yyyy"
-            maxDate={new Date()}
-            className="w-full border border-gray-300 rounded-md px-4 py-2 text-gray-700 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
-          />
+    <div className="flex flex-col items-center justify-center h-[calc(100vh-8rem)] w-full ">
+      <div className="w-full max-w-4xl mx-auto px-4">
+        <h1 className="text-2xl font-bold dark:text-white text-gray-800 mb-4 text-center">
+          Filtrar Dados por Data
+        </h1>
+        <div className="flex justify-center gap-4 mb-6">
+          <div className="flex flex-col items-center">
+            <label className="mb-2 font-medium dark:text-white/80 text-gray-700">
+              Data inicial
+            </label>
+            <DatePicker
+              id="start-date"
+              selected={selectedDate1}
+              onChange={(date) => setSelectedDate1(date || new Date())}
+              dateFormat="dd-MM-yyyy"
+              maxDate={new Date()}
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+            />
+          </div>
+          <div className="flex flex-col items-center">
+            <label className="mb-2 font-medium dark:text-white/80 text-gray-700">
+              Data final
+            </label>
+            <DatePicker
+              id="end-date"
+              selected={selectedDate2}
+              onChange={(date) => setSelectedDate2(date || new Date())}
+              dateFormat="dd-MM-yyyy"
+              maxDate={new Date()}
+              minDate={selectedDate1}
+              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+            />
+          </div>
         </div>
-        <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">Data final</label>
-          <DatePicker
-            id="end-date"
-            selected={selectedDate2}
-            onChange={(date) => setSelectedDate2(date || new Date())}
-            dateFormat="dd-MM-yyyy"
-            maxDate={new Date()}
-            minDate={selectedDate1}
-            className="w-full border border-gray-300 text-center rounded-md px-4 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
-          />
-        </div>
-      </div>
 
-      <h2 className="text-xl font-semibold text-gray-700 mb-4">
-        Dados Filtrados:
-      </h2>
-      {filteredData && filteredData.length > 0 ? (
-        <div className="overflow-x-auto max-h-80">
-          <table className="min-w-full table-auto border-collapse border border-gray-300">
-            <thead className="bg-gray-800 text-white">
-              <tr>
-                <th className="border border-gray-300 px-4 py-2">Data</th>
-                <th className="border border-gray-300 px-4 py-2">
-                  Temperatura
-                </th>
-                <th className="border border-gray-300 px-4 py-2">Humidade</th>
-                <th className="border border-gray-300 px-4 py-2">Pressão</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredData.map((entry) => (
-                <tr
-                  key={entry.id}
-                  className="hover:bg-gray-100 transition-colors duration-200 odd:bg-red-50 even:bg-white"
-                >
-                  <td className="border border-gray-300 px-4 py-2">
-                    {format(new Date(entry.time), "yyyy/MM/dd HH:mm")}
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {entry.temperature}°C
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {entry.humidity}%
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    {entry.pressure} hPa
-                  </td>
+        <h2 className="text-xl font-semibold dark:text-white/80 text-gray-700 mb-4">
+          Dados Filtrados:
+        </h2>
+        {filteredData && filteredData.length > 0 ? (
+          <div className="overflow-x-auto max-h-[24rem] rounded-lg relative">
+            <table className="min-w-full table-auto bg-white dark:bg-gray-800">
+              <thead className="bg-gray-600 text-white sticky top-0">
+                <tr>
+                  <th className="px-6 py-3 text-left text-sm font-semibold uppercase">
+                    Data
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold uppercase">
+                    Temperatura
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold uppercase">
+                    Humidade
+                  </th>
+                  <th className="px-6 py-3 text-left text-sm font-semibold uppercase">
+                    Pressão
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ) : (
-        <p className="text-center text-gray-600">
-          Nenhum dado encontrado para o intervalo selecionado.
-        </p>
-      )}
-      <h2 className="text-xl font-semibold text-gray-700 mt-6">Médias:</h2>
-      <div className="flex ml-6 mt-4 text-gray-800 justify-center gap-3">
+              </thead>
+              <tbody>
+                {filteredData.map((entry) => (
+                  <tr
+                    key={entry.id}
+                    className="dark:hover:bg-blue-900/20 hover:bg-blue-900/20 
+                     transition-colors duration-200 
+                     bg-white dark:bg-gray-800 
+                     dark:text-gray-200"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                      {format(new Date(entry.time), "yyyy/MM/dd HH:mm")}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                      {entry.temperature}°C
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                      {entry.humidity}%
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                      {entry.pressure} hPa
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : (
+          <p className="text-center dark:text-white text-gray-600">
+            Nenhum dado encontrado para o intervalo selecionado.
+          </p>
+        )}
+        <h2 className="text-xl font-semibold dark:text-white text-gray-700 mt-6">
+          Médias:
+        </h2>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-4 mx-auto">
         {metrics.map((metric, index) => (
           <MetricCard
             key={index}

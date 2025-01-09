@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
+      <body className={`dark:bg-gray-900 antialiased`}>
         <DarkMode />
         {children}
       </body>

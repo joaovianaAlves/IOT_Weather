@@ -1,6 +1,5 @@
 "use client";
 import DbData from "../components/DbData";
-import { NavBar } from "../components/NavBar";
 
 export default function History() {
   return (

@@ -43,21 +43,17 @@ export default function Home() {
 
   if (error) {
     return (
-      <>
-        <div className="container mx-auto px-4 py-8">
-          <p className="text-red-500 text-center">Error: {error.message}</p>
-        </div>
-      </>
+      <div className="dark:bg-gray-800 flex h-screen items-center justify-center mx-auto px-4 py-8">
+        <p className="text-red-500 text-center">Error: {error.message}</p>
+      </div>
     );
   }
 
   if (!realTimeData) {
     return (
-      <>
-        <div className="flex h-screen items-center justify-center">
-          <LuLoader2 className="h-12 w-12 animate-spin text-gray-800" />
-        </div>
-      </>
+      <div className="dark:bg-gray-800 flex h-screen items-center justify-center">
+        <LuLoader2 className="dark:text-white h-12 w-12 animate-spin text-gray-800" />
+      </div>
     );
   }
   const metrics = [
@@ -70,12 +66,12 @@ export default function Home() {
   ];
 
   return (
-    <>
+    <div className="h-[calc(100vh-4rem)] w-screen dark:bg-gray-900">
       <main className="flex flex-col mx-auto px-4 py-8 items-center justify-center">
-        <h1 className="text-3xl text-gray-800 font-bold text-center mb-2">
+        <h1 className="text-4xl dark:text-white text-gray-800 font-bold text-center mb-2">
           Clima Atual
         </h1>
-        <p className="text-gray-600 text-center mb-8">
+        <p className="dark:text-white/80 text-gray-600 text-center mb-8">
           Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-2/3">
@@ -89,6 +85,6 @@ export default function Home() {
           ))}
         </div>
       </main>
-    </>
+    </div>
   );
 }
