@@ -44,7 +44,6 @@ export default function Home() {
   if (error) {
     return (
       <>
-        <NavBar />
         <div className="container mx-auto px-4 py-8">
           <p className="text-red-500 text-center">Error: {error.message}</p>
         </div>
@@ -55,7 +54,6 @@ export default function Home() {
   if (!realTimeData) {
     return (
       <>
-        <NavBar />
         <div className="flex h-screen items-center justify-center">
           <LuLoader2 className="h-12 w-12 animate-spin text-gray-800" />
         </div>
@@ -73,15 +71,14 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
-      <main className="container mx-auto px-4 py-8">
+      <main className="flex flex-col mx-auto px-4 py-8 items-center justify-center">
         <h1 className="text-3xl text-gray-800 font-bold text-center mb-2">
           Clima Atual
         </h1>
         <p className="text-gray-600 text-center mb-8">
           Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-2/3">
           {metrics.map((metric, index) => (
             <MetricCard
               key={index}

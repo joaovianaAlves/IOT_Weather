@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+import DarkMode from "./components/DarkMode";
+
 export const metadata: Metadata = {
   title: "Weather Station Project",
   description: "",
@@ -13,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <DarkMode />
+        {children}
+      </body>
     </html>
   );
 }

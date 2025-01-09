@@ -3,7 +3,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { supabase } from "@/utils/db";
 import DatePicker from "react-datepicker";
-import MetricCard from "../MetricCard";
+import MetricCard from "./MetricCard";
 
 type DbDataTypes = {
   id?: string;
