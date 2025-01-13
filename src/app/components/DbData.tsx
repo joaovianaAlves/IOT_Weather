@@ -126,7 +126,7 @@ export default function DbData() {
               onChange={(date) => setSelectedDate1(date || new Date())}
               dateFormat="dd-MM-yyyy"
               maxDate={new Date()}
-              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+              className="w-full border-2 border-gray-900 dark:border-white dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
             />
           </div>
           <div className="flex flex-col items-center">
@@ -140,7 +140,7 @@ export default function DbData() {
               dateFormat="dd-MM-yyyy"
               maxDate={new Date()}
               minDate={selectedDate1}
-              className="w-full border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
+              className="w-full border-2 border-gray-900 dark:border-white dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
             />
           </div>
         </div>
@@ -149,9 +149,9 @@ export default function DbData() {
           Dados Filtrados:
         </h2>
         {filteredData && filteredData.length > 0 ? (
-          <div className="overflow-x-auto max-h-[24rem] rounded-lg relative">
-            <table className="min-w-full table-auto bg-white dark:bg-gray-800">
-              <thead className="bg-gray-600 text-white sticky top-0">
+          <div className="overflow-x-auto max-h-[24rem] rounded-xl relative border-2 dark:border-white border-gray-900">
+            <table className="min-w-full table-auto bg-white dark:bg-gray-800 ">
+              <thead className="bg-white text-gray-900  dark:bg-gray-800 dark:text-white sticky top-0 border-b-2 dark:border-b-white border-b-gray-900">
                 <tr>
                   <th className="px-6 py-3 text-left text-sm font-semibold uppercase">
                     Data
@@ -191,6 +191,27 @@ export default function DbData() {
                   </tr>
                 ))}
               </tbody>
+              <tfoot className="bg-gray-600 text-white border-t-2 dark:border-t-white border-t-gray-900 sticky bottom-0">
+                <tr
+                  className=" 
+                     bg-white dark:bg-gray-800 
+                     dark:text-gray-200
+                     text-gray-900"
+                >
+                  <td className="px-6 py-3 text-left text-sm font-semibold uppercase">
+                    Medias:
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                    {averages.temperature}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                    {averages.humidity}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                    {averages.pressure}
+                  </td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         ) : (
@@ -198,19 +219,23 @@ export default function DbData() {
             Nenhum dado encontrado para o intervalo selecionado.
           </p>
         )}
-        <h2 className="text-xl font-semibold dark:text-white text-gray-700 mt-6">
-          Médias:
-        </h2>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-4 mx-auto">
-        {metrics.map((metric, index) => (
-          <MetricCard
-            key={index}
-            title={metric.title}
-            unit={metric.unit}
-            value={metric.value}
-          />
-        ))}
+      <div>
+        <div>
+          <h2 className="text-xl font-semibold dark:text-white text-gray-700 mt-6">
+            Médias:
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-6 mt-4 mx-auto">
+          {metrics.map((metric, index) => (
+            <MetricCard
+              key={index}
+              title={metric.title}
+              unit={metric.unit}
+              value={metric.value}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
