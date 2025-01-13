@@ -86,7 +86,7 @@ export default function LineCharts() {
         <div className="flex flex-col items-center">
           <label
             htmlFor="type-select"
-            className="mb-2 font-medium text-gray-700"
+            className="mb-2 font-medium dark:text-white/80 text-gray-700"
           >
             Select Type
           </label>
@@ -94,7 +94,7 @@ export default function LineCharts() {
             id="type-select"
             value={selectedType}
             onChange={handleChange}
-            className="w-full border-2 border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="w-full border-2 border-gray-900 dark:border-white dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           >
             <option value="" disabled>
               Choose a type...
@@ -107,18 +107,22 @@ export default function LineCharts() {
           </select>
         </div>
         <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">Start Date</label>
+          <label className="mb-2 font-medium dark:text-white/80 text-gray-700">
+            Start Date
+          </label>
           <DatePicker
             id="start-date"
             selected={selectedDate1}
             onChange={(date) => setSelectedDate1(date || new Date())}
             dateFormat="dd/MM/yyyy"
             maxDate={new Date()}
-            className="w-full border-2 border-gray-300 rounded-md px-3 py-2"
+            className="w-full border-2 border-gray-900 dark:border-white dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
         <div className="flex flex-col items-center">
-          <label className="mb-2 font-medium text-gray-700">End Date</label>
+          <label className="mb-2 font-medium dark:text-white/80 text-gray-700">
+            End Date
+          </label>
           <DatePicker
             id="end-date"
             selected={selectedDate2}
@@ -126,7 +130,7 @@ export default function LineCharts() {
             dateFormat="dd/MM/yyyy"
             maxDate={new Date()}
             minDate={selectedDate1}
-            className="w-full border-2 border-gray-300 rounded-md px-3 py-2"
+            className="w-full border-2 border-gray-900 dark:border-white dark:bg-gray-700 dark:text-white rounded-xl px-4 py-2 text-gray-800 text-center focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-400 shadow-sm"
           />
         </div>
       </div>
@@ -145,7 +149,7 @@ export default function LineCharts() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey={selectedType} stroke="red" />
+          <Line type="monotone" dataKey={selectedType} stroke="blue" />
         </LineChart>
       )}
     </div>
