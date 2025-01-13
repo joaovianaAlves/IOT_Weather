@@ -28,6 +28,20 @@ export default function LineCharts() {
   const [filteredData, setFilteredData] = useState<DataTypes[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [selectedType, setSelectedType] = useState("");
+
+  const types = [
+    { value: "temperature", label: "Temperature" },
+    { value: "humidity", label: "Humidity" },
+    { value: "pressure", label: "Pressure" },
+    { value: "uv_index", label: "UV Index" },
+    { value: "precipitation", label: "Precipitation" },
+  ];
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedType(event.target.value);
+    console.log("Selected Type:", event.target.value);
+  };
 
   useEffect(() => {
     async function fetchAndFilterData() {
@@ -70,6 +84,29 @@ export default function LineCharts() {
     <div className="p-4">
       <div className="flex justify-center gap-4 mb-6">
         <div className="flex flex-col items-center">
+          <label
+            htmlFor="type-select"
+            className="mb-2 font-medium text-gray-700"
+          >
+            Select Type
+          </label>
+          <select
+            id="type-select"
+            value={selectedType}
+            onChange={handleChange}
+            className="w-full border-2 border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          >
+            <option value="" disabled>
+              Choose a type...
+            </option>
+            {types.map((type) => (
+              <option key={type.value} value={type.value}>
+                {type.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="flex flex-col items-center">
           <label className="mb-2 font-medium text-gray-700">Start Date</label>
           <DatePicker
             id="start-date"
@@ -108,8 +145,7 @@ export default function LineCharts() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="temperature" stroke="red" />
-          <Line type="monotone" dataKey="humidity" stroke="blue" />
+          <Line type="monotone" dataKey={selectedType} stroke="red" />
         </LineChart>
       )}
     </div>
