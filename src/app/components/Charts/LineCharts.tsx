@@ -194,7 +194,7 @@ export default function LineCharts() {
                 dataKey={selectedType}
                 stroke={selectedTypeColor}
                 strokeWidth={2}
-                dot={{ r: 4 }}
+                dot={false}
                 activeDot={{ r: 6 }}
               />
             </LineChart>
