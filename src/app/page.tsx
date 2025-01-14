@@ -66,25 +66,23 @@ export default function Home() {
   ];
 
   return (
-    <div className="h-[calc(100vh-4rem)] w-screen dark:bg-gray-900">
-      <main className="flex flex-col mx-auto px-4 py-8 items-center justify-center">
-        <h1 className="text-4xl dark:text-white text-gray-800 font-bold text-center mb-2">
-          Clima Atual
-        </h1>
-        <p className="dark:text-white/80 text-gray-600 text-center mb-8">
-          Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-2/3">
-          {metrics.map((metric, index) => (
-            <MetricCard
-              key={index}
-              title={metric.title}
-              value={metric.value}
-              unit={metric.unit}
-            />
-          ))}
-        </div>
-      </main>
+    <div className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mt-6">
+      <h1 className="text-4xl dark:text-white text-gray-800 font-bold text-center mb-2">
+        Clima Atual
+      </h1>
+      <p className="dark:text-white/80 text-gray-600 text-center mb-8">
+        Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
+      </p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-2/3">
+        {metrics.map((metric, index) => (
+          <MetricCard
+            key={index}
+            title={metric.title}
+            value={metric.value}
+            unit={metric.unit}
+          />
+        ))}
+      </div>
     </div>
   );
 }
