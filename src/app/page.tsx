@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase
-        .from("real_time")
+        .from("hourly_conditions")
         .select()
         .order("time", { ascending: false })
         .limit(1);
