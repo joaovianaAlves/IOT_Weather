@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch(String(process.env.NEXT_PUBLIC_URL));
+        const response = await fetch("/api/weather");
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
