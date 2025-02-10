@@ -3,7 +3,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns";
 import { supabase } from "@/utils/db";
 import DatePicker from "react-datepicker";
-import MetricCard from "./MetricCard";
+import {
+  WiBarometer,
+  WiDaySunny,
+  WiFlood,
+  WiHumidity,
+  WiRaindrop,
+  WiThermometer,
+} from "react-icons/wi";
+import { FaRegCompass } from "react-icons/fa";
+import Card, { CardTypes } from "./Card";
+import { getMetrics } from "@/utils/cardMetrics";
 
 type DbDataTypes = {
   id?: string;
@@ -13,6 +23,8 @@ type DbDataTypes = {
   uv_index: number;
   precipitation: number;
   time: string;
+
+  wind_direction: string;
 };
 
 export default function DbData() {
@@ -29,13 +41,7 @@ export default function DbData() {
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const metrics = [
-    { title: "Temperatura", value: averages.temperature, unit: "°C" },
-    { title: "Humidade", value: averages.humidity, unit: "%" },
-    { title: "Pressão", value: averages.pressure, unit: "hPa" },
-    { title: "Precipitação", value: averages.precipitation, unit: "mm" },
-    { title: "UV Index", value: averages.uv_index, unit: "" },
-  ];
+  const metrics = getMetrics(averages);
 
   useEffect(() => {
     async function fetchAndFilterData() {
@@ -153,12 +159,14 @@ export default function DbData() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-6">
-        {metrics.map((metric, index) => (
-          <MetricCard
+        {metrics.map(({ icon: Icon, color, text, value, unit }, index) => (
+          <Card
             key={index}
-            title={metric.title}
-            unit={metric.unit}
-            value={metric.value}
+            icon={Icon}
+            text={text}
+            value={value}
+            color={color}
+            unit={unit}
           />
         ))}
       </div>

@@ -1,20 +1,20 @@
 "use client";
 import { useEffect, useState } from "react";
 import { LuLoader2 } from "react-icons/lu";
-import MetricCard from "./components/MetricCard";
-import { NavBar } from "./components/NavBar";
-import { supabase } from "@/utils/db";
-import { format } from "date-fns";
+import { format, interval } from "date-fns";
+import Card from "./components/Card";
+import { getMetrics } from "@/utils/cardMetrics";
 
 type DataTypes = {
   id?: string;
   temperature: number;
   humidity: number;
   pressure: number;
+  altitude: number;
   uv_index: number;
   precipitation: number;
+  wind_direction: string;
   time: Date;
-  altitude: number;
 };
 
 export default function Home() {
@@ -23,23 +23,26 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const { data, error } = await supabase
-        .from("hourly_conditions")
-        .select()
-        .order("time", { ascending: false })
-        .limit(1);
+      try {
+        const response = await fetch(String(process.env.NEXT_PUBLIC_URL));
 
-      if (error) {
-        setError(error);
-        return;
-      } else if (data && data.length > 0) {
-        setRealTimeData(data[0]);
-      } else {
-        setError(new Error("No data available."));
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data: DataTypes = await response.json();
+        setRealTimeData({ ...data, time: new Date() });
+        setError(null);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err : new Error("Failed to fetch data")
+        );
       }
     }
     fetchData();
-  }, []);
+    const interval = setInterval(fetchData, 5000);
+    return () => clearInterval(interval);
+  }, [interval]);
 
   if (error) {
     return (
@@ -56,14 +59,8 @@ export default function Home() {
       </div>
     );
   }
-  const metrics = [
-    { title: "Temperatura", value: realTimeData.temperature, unit: "°C" },
-    { title: "Humidade", value: realTimeData.humidity, unit: "%" },
-    { title: "Pressão", value: realTimeData.pressure, unit: "hPa" },
-    { title: "Precipitação", value: realTimeData.precipitation, unit: "mm" },
-    { title: "UV Index", value: realTimeData.uv_index, unit: "" },
-    { title: "Altitude", value: realTimeData.altitude, unit: "m" },
-  ];
+
+  const metrics = getMetrics(realTimeData);
 
   return (
     <div className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mt-6">
@@ -74,12 +71,14 @@ export default function Home() {
         Atualizado em: {format(realTimeData.time, "yyyy/MM/dd HH:mm")}
       </p>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 w-2/3">
-        {metrics.map((metric, index) => (
-          <MetricCard
+        {metrics.map(({ icon, color, text, value, unit }, index) => (
+          <Card
             key={index}
-            title={metric.title}
-            value={metric.value}
-            unit={metric.unit}
+            icon={icon}
+            text={text}
+            value={value}
+            color={color}
+            unit={unit}
           />
         ))}
       </div>
