@@ -3,7 +3,7 @@ import { IconType } from "react-icons";
 export type CardTypes = {
   icon: { Icon: IconType; color: string };
   text: string;
-  value: Date | number | string;
+  value: Date | number | string | undefined;
   color: string;
   unit: string;
 };
