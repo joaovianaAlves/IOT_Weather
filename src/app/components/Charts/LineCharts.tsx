@@ -20,6 +20,7 @@ type DataTypes = {
   precipitation: number;
   time: string;
   altitude: number;
+  wind_speed: number;
 };
 
 const types = [
@@ -28,6 +29,7 @@ const types = [
   { value: "pressure", label: "Pressure", color: "Gray" },
   { value: "uv_index", label: "UV Index", color: "Yellow" },
   { value: "precipitation", label: "Precipitation", color: "Blue" },
+  { value: "wind_speed", label: "Wind Speed", color: "Blue" },
 ];
 
 export default function LineCharts() {

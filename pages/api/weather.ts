@@ -7,7 +7,7 @@ export default async function handler(
   console.log("🟢 API Request Received: /api/weather");
 
   try {
-    const response = await fetch("http://192.168.5.85/data");
+    const response = await fetch("http://192.168.5.85");
 
     if (!response.ok) {
       console.error(`❌ Failed to fetch ESP32 data: ${response.status}`);
@@ -15,7 +15,6 @@ export default async function handler(
     }
 
     const data = await response.json();
-    console.log("✅ Data received from ESP32:", data);
 
     res.status(200).json(data);
   } catch (error) {
